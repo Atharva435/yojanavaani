@@ -1,0 +1,12 @@
+{
+  "name": "yojanavaani-vercel",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo \"Static site ready for Vercel\"",
+    "start": "npx serve ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

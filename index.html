@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101d38">
+  <meta name="description" content="Find government schemes you may qualify for, understand the documents, and learn where to apply.">
+  <title>YojanaVaani — Government schemes, made clearer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=7">
+</head>
+<body>
+  <main id="login-screen" class="login-screen">
+    <div class="login-backdrop" aria-hidden="true"><span></span><span></span><span></span></div>
+    <section class="login-layout">
+      <div class="login-welcome">
+        <a class="brand login-brand" href="/" aria-label="YojanaVaani home">
+          <span class="brand-mark" aria-hidden="true">य</span>
+          <span><strong>YojanaVaani</strong><small data-i18n="brand_tagline">YOUR RIGHTS, WITH A VOICE</small></span>
+        </a>
+        <div class="login-message">
+          <span class="login-eyebrow"><i></i><span data-i18n="login_eyebrow">A LITTLE HELP. A LOT MORE POSSIBLE.</span></span>
+          <h1 data-i18n="login_title">The support you deserve,<br><em>closer than you think.</em></h1>
+          <p data-i18n="login_body">Sign in to explore government schemes, understand what to prepare, and find the next step—at your own pace.</p>
+          <div class="login-assurances">
+            <div><span>01</span><p><strong data-i18n="login_benefit_1_title">Guidance in your language</strong><small data-i18n="login_benefit_1_body">Explore 22 scheduled Indian languages</small></p></div>
+            <div><span>02</span><p><strong data-i18n="login_benefit_2_title">Your answers stay yours</strong><small data-i18n="login_benefit_2_body">Eligibility answers are not saved</small></p></div>
+            <div><span>03</span><p><strong data-i18n="login_benefit_3_title">Always free to check</strong><small data-i18n="login_benefit_3_body">No agent or payment needed</small></p></div>
+          </div>
+        </div>
+        <div class="login-footer"><span>YojanaVaani</span><span>·</span><span data-i18n="footer_demo">Public guidance platform for Indian government schemes</span></div>
+      </div>
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="login-card-mark">✳</div>
+        <span class="login-card-kicker" data-i18n="login_card_kicker">WELCOME</span>
+        <h2 id="login-title" data-i18n="login_card_title">Your next step starts here.</h2>
+        <p class="login-card-copy" data-i18n="login_card_body">Sign in securely using your mobile number.</p>
+        <label class="login-language"><span data-i18n="language_label">Language</span>
+          <select id="login-language-select" aria-label="Language">
+            <option value="en">English</option><option value="as">অসমীয়া</option><option value="bn">বাংলা</option>
+            <option value="brx">बड़ो</option><option value="doi">डोगरी</option><option value="gu">ગુજરાતી</option>
+            <option value="hi">हिन्दी</option><option value="kn">ಕನ್ನಡ</option><option value="ks">کٲشُر</option>
+            <option value="kok">कोंकणी</option><option value="mai">मैथिली</option><option value="ml">മലയാളം</option>
+            <option value="mni">মেইতেই</option><option value="mr">मराठी</option><option value="ne">नेपाली</option>
+            <option value="or">ଓଡ଼ିଆ</option><option value="pa">ਪੰਜਾਬੀ</option><option value="sa">संस्कृतम्</option>
+            <option value="sat">ᱥᱟᱱᱛᱟᱲᱤ</option><option value="sd">سنڌي</option><option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option><option value="ur">اردو</option>
+          </select>
+        </label>
+        <p class="language-coverage-note" data-i18n="login_language_scope">22 scheduled languages can be selected. Some scheme-specific content is still being translated and reviewed.</p>
+        <div id="firebase-methods" hidden>
+          <form id="phone-signin-form">
+            <label class="login-input-label" for="login-phone" data-i18n="phone_label">Mobile number</label>
+            <div class="phone-input-wrap"><span aria-hidden="true">🇮🇳 <b>+91</b></span><input class="login-input" id="login-phone" name="phone" type="tel" autocomplete="tel-national" inputmode="numeric" pattern="[0-9\s\(\)\-]{10,14}" placeholder="98765 43210" aria-describedby="phone-hint" required></div>
+            <small class="login-input-hint" id="phone-hint" data-i18n="phone_hint">Enter your 10-digit Indian mobile number. We’ll send a verification code by SMS.</small>
+            <button class="auth-submit" id="phone-send-button" type="submit"><span data-i18n="phone_send">Send verification code</span><span>→</span></button>
+          </form>
+          <form id="phone-code-form" hidden>
+            <label class="login-input-label" for="phone-code" data-i18n="phone_code_label">Enter the SMS code</label>
+            <input class="login-input verification-code" id="phone-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required>
+            <button class="auth-submit" type="submit"><span data-i18n="phone_verify">Verify and sign in</span><span>→</span></button>
+            <button class="change-number" id="phone-edit-number" type="button" data-i18n="phone_edit_number">Use a different number</button>
+          </form>
+          <p class="login-status" id="login-status" aria-live="polite"></p>
+        </div>
+        <div id="firebase-setup" class="firebase-setup" hidden>
+          <strong data-i18n="firebase_setup_title">Mobile sign-in is not set up yet</strong>
+          <p data-i18n="firebase_setup_body">Connect a Firebase project to send SMS verification codes.</p>
+          <details><summary data-i18n="firebase_setup_steps">Show Firebase setup steps</summary>
+            <ol><li data-i18n="firebase_step_1">Create a Firebase project and register a web app. Authentication and Identity Toolkit are provided by Firebase.</li>
+              <li data-i18n="firebase_step_2">In Authentication, enable Phone and configure its SMS region policy.</li>
+              <li data-i18n="firebase_step_3">Add 127.0.0.1 and localhost to Firebase Authentication's authorized domains. Set the Firebase web configuration environment variables before starting this app.</li>
+              <li data-i18n="firebase_step_4">Phone authentication may require billing and SMS quotas. Configure Firebase test phone numbers for safe local testing.</li></ol>
+          </details>
+        </div>
+        <p class="login-notice" data-i18n="login_phone_only">Only mobile-number sign-in is available. Your number is verified by SMS.</p>
+        <p class="login-privacy"><span>♧</span><span data-i18n="login_privacy">We only use your mobile number for sign-in. Never share your verification code.</span></p>
+        <p class="login-terms"><span data-i18n="login_terms">By continuing, you agree to use this service responsibly and verify official scheme details before applying.</span></p>
+      </section>
+    </section>
+  </main>
+
+  <div class="app-shell" id="app-shell" hidden>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="YojanaVaani home">
+        <span class="brand-mark" aria-hidden="true">य</span>
+        <span><strong>YojanaVaani</strong><small>YOUR RIGHTS, WITH A VOICE</small></span>
+      </a>
+      <nav aria-label="Main navigation" class="main-nav">
+        <a class="nav-link active" href="#find" data-i18n="nav_find">Find schemes</a>
+        <a class="nav-link" href="#catalog" data-i18n="nav_browse">Browse schemes</a>
+        <a class="nav-link" href="#helper" data-i18n="nav_helper">Helper mode</a>
+      </nav>
+      <div class="top-tools">
+        <label class="language-picker"><span class="sr-only" data-i18n="language_label">Language</span>
+          <select id="language-select" aria-label="Language">
+            <option value="en">English</option><option value="as">অসমীয়া</option><option value="bn">বাংলা</option>
+            <option value="brx">बड़ो</option><option value="doi">डोगरी</option><option value="gu">ગુજરાતી</option>
+            <option value="hi">हिन्दी</option><option value="kn">ಕನ್ನಡ</option><option value="ks">کٲشُر</option>
+            <option value="kok">कोंकणी</option><option value="mai">मैथिली</option><option value="ml">മലയാളം</option>
+            <option value="mni">মেইতেই</option><option value="mr">मराठी</option><option value="ne">नेपाली</option>
+            <option value="or">ଓଡ଼ିଆ</option><option value="pa">ਪੰਜਾਬੀ</option><option value="sa">संस्कृतम्</option>
+            <option value="sat">ᱥᱟᱱᱛᱟᱲᱤ</option><option value="sd">سنڌي</option><option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option><option value="ur">اردو</option>
+          </select>
+        </label>
+        <span class="demo-tag"><i></i><span data-i18n="demo_tag">PUBLIC SUPPORT · EASY CHECKS</span></span>
+        <div class="account-menu"><span id="account-name"></span><button type="button" id="logout-button" data-i18n="sign_out">Sign out</button></div>
+      </div>
+    </header>
+
+    <main id="find">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="spark">✳</span><span data-i18n="hero_eyebrow">GOVERNMENT SUPPORT, MADE CLEARER</span></div>
+          <h1 data-i18n="hero_title">You may be eligible.<br><em>Let’s find out together.</em></h1>
+          <p data-i18n="hero_body">Answer a few simple questions. We’ll find possible schemes, explain what to prepare, and show you where to apply.</p>
+          <div class="hero-points">
+            <span><b>01</b><span data-i18n="hero_point_1">Plain-language guidance</span></span>
+            <span><b>02</b><span data-i18n="hero_point_2">Your answers stay on this device</span></span>
+            <span><b>03</b><span data-i18n="hero_point_3">Always free to check</span></span>
+          </div>
+        </div>
+        <aside class="voice-card">
+          <div class="voice-top"><span class="voice-orbit">♫</span><span class="voice-live"><i></i><span data-i18n="voice_ready">VOICE READY</span></span></div>
+          <h2 data-i18n="voice_title">Prefer to speak?</h2>
+          <p data-i18n="voice_body">Answer the questions out loud in your language. You can change or skip answers any time.</p>
+          <button type="button" class="voice-button" id="voice-start"><span aria-hidden="true">🎙</span><span data-i18n="voice_start">Start voice check</span><span class="voice-arrow">↗</span></button>
+          <div class="voice-languages"><span data-i18n="voice_available">VOICE SUPPORT DEPENDS ON YOUR BROWSER’S LANGUAGE PACK</span></div>
+        </aside>
+        <span class="hero-sun" aria-hidden="true"></span>
+      </section>
+
+      <div class="notice" role="note">
+        <span class="notice-icon">i</span>
+        <p><strong data-i18n="notice_title">A helpful starting point, not an approval.</strong> <span data-i18n="notice_body">Scheme rules can change and some require official records. Always confirm your eligibility with the scheme or an authorised centre.</span></p>
+      </div>
+
+      <section class="popular-schemes" aria-labelledby="popular-title" style="margin:24px 0 0;">
+        <div class="section-heading" style="margin-bottom:16px;">
+          <div><span class="step-label"><span>★</span><span>POPULAR SUPPORT</span></span><h2 id="popular-title">People often check these first</h2></div>
+        </div>
+        <div id="popular-scheme-list" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;"></div>
+      </section>
+
+      <div class="workspace">
+        <section class="form-panel" aria-labelledby="form-title">
+          <div class="section-heading">
+            <div><span class="step-label"><span>1</span><span data-i18n="step_about">A LITTLE ABOUT YOU</span></span><h2 id="form-title" data-i18n="form_title">Let’s start with the basics</h2><p data-i18n="form_intro">This information helps us find schemes worth checking.</p></div>
+            <span class="private-badge"><span>⌑</span><span data-i18n="private_badge">Not saved</span></span>
+          </div>
+          <form id="eligibility-form">
+            <div class="form-grid">
+              <label class="field"><span data-i18n="label_age">Your age</span><span class="input-wrap"><input name="age" type="number" min="0" max="120" inputmode="numeric" placeholder="e.g. 32" required><span class="input-suffix" data-i18n="years">years</span></span></label>
+              <label class="field"><span data-i18n="label_state">State or union territory</span><select name="state" required><option value="" data-i18n="choose_state">Choose your state</option></select></label>
+              <label class="field"><span data-i18n="label_income">Household income per year</span><span class="input-wrap"><span class="input-prefix">₹</span><input name="annual_income" type="number" min="0" max="100000000" inputmode="numeric" placeholder="e.g. 180000" required></span><small data-i18n="hint_income">An estimate is okay. This stays on your device.</small></label>
+              <label class="field"><span data-i18n="label_gender">How do you identify?</span><select name="gender" required><option value="" data-i18n="choose_one">Choose one</option><option value="woman" data-i18n="woman">Woman</option><option value="man" data-i18n="man">Man</option><option value="other" data-i18n="other">Another identity</option><option value="prefer_not_to_say" data-i18n="prefer_not">Prefer not to say</option></select></label>
+              <label class="field"><span data-i18n="label_category">Community category (optional)</span><select name="category" required><option value="" data-i18n="choose_one">Choose one</option><option value="general">General</option><option value="sc">SC</option><option value="st">ST</option><option value="obc">OBC</option><option value="other" data-i18n="other">Other</option><option value="prefer_not_to_say" data-i18n="prefer_not">Prefer not to say</option></select></label>
+              <label class="field"><span data-i18n="label_work">Which best describes you?</span><select name="occupation" required><option value="" data-i18n="choose_one">Choose one</option><option value="farmer" data-i18n="farmer">Farmer</option><option value="student" data-i18n="student">Student</option><option value="worker" data-i18n="worker">Worker</option><option value="other" data-i18n="other">Other</option></select></label>
+            </div>
+            <div class="more-title"><span data-i18n="more_title">A few more yes / no questions</span><span data-i18n="more_optional">Only used to find a closer match</span></div>
+            <div class="checks-grid">
+              <label class="check-card"><input name="owns_land" type="checkbox"><span class="fake-check"></span><span data-i18n="check_land">My family has farm land</span></label>
+              <label class="check-card"><input name="is_student" type="checkbox"><span class="fake-check"></span><span data-i18n="check_student">I am currently studying</span></label>
+              <label class="check-card"><input name="has_lpg" type="checkbox"><span class="fake-check"></span><span data-i18n="check_lpg">My household has an LPG connection</span></label>
+              <label class="check-card"><input name="has_bank_account" type="checkbox"><span class="fake-check"></span><span data-i18n="check_bank">I have a savings bank or post office account</span></label>
+              <label class="check-card wide"><input name="is_taxpayer" type="checkbox"><span class="fake-check"></span><span data-i18n="check_tax">I pay income tax (asked for pension scheme checks)</span></label>
+            </div>
+            <div class="form-actions"><button class="primary-button" type="submit"><span data-i18n="find_button">Find my possible schemes</span><span aria-hidden="true">→</span></button><span class="form-assurance"><span>♡</span><span data-i18n="free_note">Free to use. No agent required.</span></span></div>
+          </form>
+        </section>
+        <aside class="side-note">
+          <div class="leaf-art" aria-hidden="true">✳</div>
+          <span class="step-label"><span>?</span><span data-i18n="why_ask">WHY WE ASK</span></span>
+          <h3 data-i18n="side_title">Your details help us narrow the search.</h3>
+          <p data-i18n="side_body">We only use your answers to check scheme rules. A regular check is not stored or sent anywhere.</p>
+          <div class="privacy-row"><span>✓</span><span data-i18n="privacy_no_id">We never ask for Aadhaar, bank numbers, or OTPs here.</span></div>
+          <div class="privacy-row"><span>✓</span><span data-i18n="privacy_no_save">Your eligibility answers are not saved.</span></div>
+          <a href="https://locator.csccloud.in/" target="_blank" rel="noopener noreferrer" class="side-link"><span data-i18n="find_csc">Find a Common Service Centre</span><span>↗</span></a>
+        </aside>
+      </div>
+
+      <section id="results" class="results-section" aria-live="polite" hidden>
+        <div class="results-heading"><div><span class="step-label"><span>2</span><span data-i18n="step_matches">YOUR POSSIBLE MATCHES</span></span><h2 data-i18n="results_title">Schemes to explore</h2><p data-i18n="results_intro">These are starting points. Check the official rules before applying.</p></div><div class="results-actions"><button type="button" class="text-button" id="speak-results">🔊 <span data-i18n="speak_results">Listen to matches</span></button><button type="button" class="text-button" id="edit-answers" data-i18n="edit_answers">← Edit answers</button></div></div>
+        <div id="match-list" class="match-list"></div>
+        <div class="fraud-banner"><span class="fraud-icon">!</span><div><strong data-i18n="fraud_title">Applications are free.</strong><p data-i18n="fraud_body">Never pay an agent for a guaranteed approval. Do not share your OTP, PIN, or bank password.</p></div><span class="fraud-spark">✳</span></div>
+      </section>
+
+      <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
+        <div class="catalog-heading">
+          <div>
+            <span class="step-label"><span>✳</span><span data-i18n="catalog_eyebrow">EXPLORE THE CATALOGUE</span></span>
+            <h2 id="catalog-title" data-i18n="catalog_title">Browse government schemes</h2>
+            <p data-i18n="catalog_intro">Search the schemes in this demo and review their basic profile checks, documents, and official application links.</p>
+          </div>
+          <a class="catalog-official-link" href="https://www.myscheme.gov.in/search/state/all-states" target="_blank" rel="noopener noreferrer" data-i18n="catalog_official">Browse the official State/UT scheme directory ↗</a>
+        </div>
+        <div class="catalog-state-row">
+          <label class="catalog-state-select"><span data-i18n="catalog_state_label">Find official schemes for your state or UT</span>
+            <select id="catalog-state"><option value="" data-i18n="catalog_state_choose">Choose a state or UT</option></select>
+          </label>
+          <a class="catalog-state-link" id="catalog-state-link" href="https://www.myscheme.gov.in/search/state/all-states" target="_blank" rel="noopener noreferrer" data-i18n="catalog_state_link">Browse all State/UT schemes ↗</a>
+        </div>
+        <div class="catalog-tools">
+          <label class="catalog-search-wrap">
+            <span class="sr-only" data-i18n="catalog_search_label">Search schemes</span>
+            <span aria-hidden="true">⌕</span>
+            <input id="catalog-search" type="search" placeholder="Search name, benefit, or eligibility" autocomplete="off">
+          </label>
+          <label class="catalog-filter-wrap"><span class="sr-only" data-i18n="catalog_category_label">Filter by category</span>
+            <select id="catalog-category"><option value="" data-i18n="catalog_all">All categories</option></select>
+          </label>
+          <span class="catalog-count" id="catalog-count" aria-live="polite"></span>
+        </div>
+        <div id="catalog-list" class="catalog-grid" aria-live="polite"></div>
+        <p class="catalog-disclaimer" data-i18n="catalog_disclaimer">This prototype catalogue is small and not exhaustive. Rules can change; a possible match is not approval. Confirm current criteria with the linked official source.</p>
+      </section>
+
+      <section class="helper-section" id="helper">
+        <div class="helper-copy"><span class="step-label"><span>✳</span><span data-i18n="helper_label">FOR COMMUNITY HELPERS</span></span><h2 data-i18n="helper_title">Helping a family at your centre?</h2><p data-i18n="helper_body">Check several profiles together. Save only a short label and basic age/state details on this device—never sensitive identity or financial account numbers.</p></div>
+        <button class="outline-button" id="helper-open" type="button"><span data-i18n="helper_button">Open helper mode</span><span>→</span></button>
+      </section>
+      <footer class="footer"><span>YojanaVaani <span>·</span> <span data-i18n="footer_demo">Public guidance platform for Indian government schemes</span></span><span><a href="https://www.myscheme.gov.in/" target="_blank" rel="noopener noreferrer" data-i18n="footer_portal">Explore the official myScheme portal ↗</a></span></footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog class="helper-dialog" id="helper-dialog">
+    <form method="dialog" class="dialog-head"><div><span class="step-label"><span>✳</span><span data-i18n="helper_label">FOR COMMUNITY HELPERS</span></span><h2 data-i18n="helper_dialog_title">Quick family checks</h2></div><button class="close-button" aria-label="Close">×</button></form>
+    <div class="dialog-body">
+      <p class="dialog-intro" data-i18n="helper_dialog_intro">Add one profile per row. Submitting saves only the label, state, age, and number of possible matches on this device.</p>
+      <div id="family-rows"></div>
+      <button type="button" class="add-row-button" id="add-family">+ <span data-i18n="add_family">Add another family</span></button>
+      <div class="dialog-actions"><button type="button" class="outline-button" id="helper-cancel" data-i18n="cancel">Cancel</button><button type="button" class="primary-button" id="helper-submit"><span data-i18n="save_checks">Save checks</span><span>→</span></button></div>
+      <div id="helper-status" class="helper-status" aria-live="polite"></div>
+    </div>
+  </dialog>
+  <section class="assistant-panel" id="assistant-panel" aria-label="AI scheme assistant" hidden>
+    <header class="assistant-header">
+      <div class="assistant-identity"><span class="assistant-avatar" aria-hidden="true">✳</span><div><strong data-i18n="assistant_title">YojanaVaani AI helper</strong><small id="assistant-language-label">Replies in English</small></div></div>
+      <div class="assistant-header-actions">
+        <button type="button" class="assistant-icon-button" id="assistant-speak-toggle" aria-pressed="false" aria-label="Speak replies" title="Speak replies">🔊</button>
+        <button type="button" class="assistant-icon-button" id="assistant-close" aria-label="Close assistant">×</button>
+      </div>
+    </header>
+    <p class="assistant-notice" data-i18n="assistant_notice">General guidance only. Confirm scheme rules with official sources. Never share OTPs, PINs, or bank details.</p>
+    <div class="assistant-messages" id="assistant-messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
+    <p class="assistant-status" id="assistant-status" aria-live="polite"></p>
+    <form class="assistant-form" id="assistant-form">
+      <textarea id="assistant-input" rows="2" maxlength="1500" aria-label="Ask your question" placeholder="Type your question in your language…" required></textarea>
+      <div class="assistant-form-actions">
+        <button type="button" class="assistant-icon-button assistant-mic" id="assistant-mic" aria-label="Ask by voice" title="Ask by voice">🎙</button>
+        <span data-i18n="assistant_voice_hint">Voice input depends on browser support</span>
+        <button type="submit" class="assistant-send" id="assistant-send"><span data-i18n="assistant_send">Send</span><span aria-hidden="true">→</span></button>
+      </div>
+    </form>
+  </section>
+  <button type="button" class="assistant-launcher" id="assistant-toggle" aria-controls="assistant-panel" aria-expanded="false" hidden>
+    <span class="assistant-launcher-icon" aria-hidden="true">✳</span><span data-i18n="assistant_open">Ask the AI helper</span>
+  </button>
+  <script src="locales.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
